@@ -1,0 +1,50 @@
+﻿@model ColegioSanJose.Models.Expediente
+
+@{
+    ViewData["Title"] = "Eliminar Expediente";
+}
+
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card border-danger shadow">
+                <div class="card-header bg-danger text-white">
+                    <h4 class="mb-0"><i class="bi bi-exclamation-octagon"></i> Confirmar Eliminación</h4>
+                </div>
+                <div class="card-body p-4">
+                    <h5 class="text-center text-danger mb-4">¿Estás seguro de que quieres borrar este registro académico?</h5>
+                    
+                    <div class="bg-light p-4 rounded mb-4 shadow-sm border">
+                        <dl class="row mb-0">
+                            <dt class="col-sm-4 text-muted">Estudiante:</dt>
+                            <dd class="col-sm-8 fw-bold">@Model.Alumno?.Nombre @Model.Alumno?.Apellido</dd>
+
+                            <dt class="col-sm-4 text-muted">Materia:</dt>
+                            <dd class="col-sm-8">@Model.Materia?.NombreMateria</dd>
+
+                            <dt class="col-sm-4 text-muted">Nota Final:</dt>
+                            <dd class="col-sm-8">
+                                <span class="badge @(Model.NotaFinal >= 6 ? "bg-success" : "bg-danger")">
+                                    @Model.NotaFinal
+                                </span>
+                            </dd>
+
+                            <dt class="col-sm-4 text-muted">Observaciones:</dt>
+                            <dd class="col-sm-8 italic">"@Html.DisplayFor(model => model.Observaciones)"</dd>
+                        </dl>
+                    </div>
+
+                    <form asp-action="Delete" class="text-center">
+                        <input type="hidden" asp-for="ExpedienteId" />
+                        <button type="submit" class="btn btn-danger btn-lg px-5 shadow-sm me-2">
+                            <i class="bi bi-trash"></i> Eliminar Registro
+                        </button>
+                        <a asp-action="Index" class="btn btn-outline-secondary btn-lg px-4">
+                            Cancelar
+                        </a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

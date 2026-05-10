@@ -1,0 +1,44 @@
+﻿@model ColegioSanJose.Models.Materia
+
+@{
+    ViewData["Title"] = "Eliminar Materia";
+}
+
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card border-danger shadow">
+                <div class="card-header bg-danger text-white">
+                    <h4 class="mb-0"><i class="bi bi-exclamation-triangle"></i> Confirmar Eliminación</h4>
+                </div>
+                <div class="card-body p-4">
+                    <h5 class="text-center text-danger mb-4">¿Estás seguro de que deseas eliminar esta materia permanentemente?</h5>
+                    
+                    <div class="bg-light p-4 rounded mb-4 border">
+                        <dl class="row mb-0">
+                            <dt class="col-sm-4 text-muted">Materia:</dt>
+                            <dd class="col-sm-8 fw-bold fs-5 text-dark">@Html.DisplayFor(model => model.NombreMateria)</dd>
+
+                            <dt class="col-sm-4 text-muted pt-2">Docente Asignado:</dt>
+                            <dd class="col-sm-8 pt-2">@Html.DisplayFor(model => model.Docente)</dd>
+                        </dl>
+                    </div>
+
+                    <div class="alert alert-warning shadow-sm">
+                        <i class="bi bi-info-circle-fill"></i> <strong>Atención:</strong> Si eliminas esta materia, podrías afectar los expedientes académicos asociados a ella.
+                    </div>
+
+                    <form asp-action="Delete" class="text-center mt-4">
+                        <input type="hidden" asp-for="MateriaId" />
+                        <button type="submit" class="btn btn-danger btn-lg px-5 shadow-sm me-2">
+                            <i class="bi bi-trash"></i> Sí, Eliminar Materia
+                        </button>
+                        <a asp-action="Index" class="btn btn-outline-secondary btn-lg px-4">
+                            Cancelar
+                        </a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

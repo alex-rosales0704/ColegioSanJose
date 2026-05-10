@@ -1,0 +1,62 @@
+﻿@model ColegioSanJose.Models.Alumno
+
+@{
+    ViewData["Title"] = "Nuevo Alumno";
+}
+
+<div class="container mt-4">
+    <h1 class="text-primary"><i class="bi bi-person-plus"></i> Registrar Nuevo Alumno</h1>
+    <p class="text-muted">Ingrese los datos personales del estudiante para darlo de alta en el sistema.</p>
+    <hr />
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <form asp-action="Create">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        
+                        <div class="form-group mb-3">
+                            <label asp-for="Nombre" class="control-label font-weight-bold">Nombre del Alumno</label>
+                            <input asp-for="Nombre" class="form-control" placeholder="Ej: Alex" />
+                            <span asp-validation-for="Nombre" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label asp-for="Apellido" class="control-label font-weight-bold">Apellido</label>
+                            <input asp-for="Apellido" class="form-control" placeholder="Ej: Rosales" />
+                            <span asp-validation-for="Apellido" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label asp-for="FechaNacimiento" class="control-label font-weight-bold">Fecha de Nacimiento</label>
+                            <input asp-for="FechaNacimiento" class="form-control" type="date" />
+                            <span asp-validation-for="FechaNacimiento" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group mb-4">
+                            <label asp-for="Grado" class="control-label font-weight-bold">Grado / Año</label>
+                            <input asp-for="Grado" class="form-control" placeholder="Ej: Primero" />
+                            <span asp-validation-for="Grado" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group d-flex justify-content-between">
+                            <button type="submit" class="btn btn-success px-4 shadow-sm">
+                                <i class="bi bi-check-circle"></i> Guardar Alumno
+                            </button>
+                            <a asp-action="Index" class="btn btn-outline-secondary">
+                                <i class="bi bi-arrow-left"></i> Volver a la lista
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

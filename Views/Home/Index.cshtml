@@ -1,0 +1,36 @@
+﻿@{
+    ViewData["Title"] = "Página de Inicio";
+}
+
+<div class="container-fluid bg-light p-5 rounded-3 mt-4 box-shadow">
+    <div class="row align-items-center">
+        <div class="col-md-4 text-center">
+            <img src="~/images/escudo-colegio.png"
+                 alt="Cresta del Colegio San José"
+                 class="img-fluid rounded-circle"
+                 style="max-width: 280px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); padding: 10px; background-color: white; border: 2px solid #eaeaea;" />
+        </div>
+        
+        <div class="col-md-8">
+            <h1 class="display-3 font-weight-bold text-dark">Colegio San José</h1>
+            <p class="lead text-muted">Sistema de Gestión Académica y Control de Expedientes</p>
+            
+            <hr class="my-4">
+            
+            <p class="fs-5 text-dark">
+                Bienvenido al Panel Administrativo del Colegio San José. Este sistema está diseñado para
+                facilitar el control integral de la información escolar. Aquí podrá gestionar de manera
+                eficiente los datos de los alumnos, registros de materias y el seguimiento de expedientes académicos.
+            </p>
+            <p class="text-muted">
+                Utilice el menú de navegación en la parte superior para acceder a las distintas secciones.
+                Si necesita ayuda, consulte el manual de usuario o contacte al administrador del sistema.
+            </p>
+            
+            <div class="d-grid gap-2 d-md-flex justify-content-md-start mt-4">
+                <a class="btn btn-primary btn-lg px-4 me-md-2" asp-controller="Alumnos" asp-action="Index">👥 Alumnos</a>
+                <a class="btn btn-outline-secondary btn-lg px-4" asp-controller="Expedientes" asp-action="Index">📂 Expedientes</a>
+            </div>
+        </div>
+    </div>
+</div>

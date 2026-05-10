@@ -1,0 +1,43 @@
+﻿@model ColegioSanJose.Models.Alumno
+
+@{
+    ViewData["Title"] = "Detalles del Alumno";
+}
+
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow border-0">
+                <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+                    <h4 class="mb-0"><i class="bi bi-person-badge"></i> Información del Estudiante</h4>
+                    <span class="badge bg-light text-primary">ID: @Model.AlumnoId</span>
+                </div>
+                <div class="card-body p-4">
+                    <div class="row mb-3">
+                        <div class="col-sm-4 text-muted font-weight-bold">Nombre Completo:</div>
+                        <div class="col-sm-8 fs-5">@Html.DisplayFor(model => model.Nombre) @Html.DisplayFor(model => model.Apellido)</div>
+                    </div>
+                    
+                    <hr class="text-light">
+
+                    <dl class="row">
+                        <dt class="col-sm-4 text-muted">Fecha de Nacimiento:</dt>
+                        <dd class="col-sm-8">@Html.DisplayFor(model => model.FechaNacimiento)</dd>
+
+                        <dt class="col-sm-4 text-muted">Grado Académico:</dt>
+                        <dd class="col-sm-8"><span class="badge bg-info text-dark">@Html.DisplayFor(model => model.Grado)</span></dd>
+                    </dl>
+
+                    <div class="mt-4 pt-3 border-top d-flex justify-content-end">
+                        <a asp-action="Edit" asp-route-id="@Model?.AlumnoId" class="btn btn-warning shadow-sm me-2">
+                            <i class="bi bi-pencil-square"></i> Editar Datos
+                        </a>
+                        <a asp-action="Index" class="btn btn-outline-secondary shadow-sm">
+                            <i class="bi bi-arrow-left-circle"></i> Volver a la Lista
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

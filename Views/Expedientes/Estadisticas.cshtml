@@ -1,0 +1,103 @@
+﻿@model IEnumerable<ColegioSanJose.Models.PromedioViewModel>
+
+@{
+    ViewData["Title"] = "Estadísticas Académicas";
+}
+
+<div class="container mt-4">
+    <div class="text-center mb-5">
+        <h1 class="display-4 text-primary font-weight-bold">
+            <i class="bi bi-graph-up-arrow"></i> Reporte de Rendimiento
+        </h1>
+        <p class="lead text-muted">Análisis estadístico de promedios generales por estudiante - Colegio San José</p>
+        <hr class="my-4" style="width: 30%; border-top: 3px solid #007bff;">
+    </div>
+
+    <div class="row">
+        <div class="col-md-5 mb-4">
+            <div class="card shadow border-0 h-100">
+                <div class="card-header bg-dark text-white">
+                    <h5 class="mb-0"><i class="bi bi-list-ol"></i> Ranking de Alumnos</h5>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Alumno</th>
+                                    <th class="text-center">Promedio</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td class="align-middle">@item.NombreCompleto</td>
+                                        <td class="text-center align-middle">
+                                            <span class="badge @(item.Promedio >= 6 ? "bg-success" : "bg-danger") fs-6 shadow-sm">
+                                                @item.Promedio.ToString("F2")
+                                            </span>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-7 mb-4">
+            <div class="card shadow border-0 h-100">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0"><i class="bi bi-bar-chart-fill"></i> Visualización de Datos</h5>
+                </div>
+                <div class="card-body d-flex align-items-center justify-content-center" style="min-height: 400px;">
+                    <canvas id="graficoPromedios"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+        const ctx = document.getElementById('graficoPromedios').getContext('2d');
+            
+        const nombres = @Html.Raw(Json.Serialize(Model.Select(m => m.NombreCompleto)));
+        const promedios = @Html.Raw(Json.Serialize(Model.Select(m => m.Promedio)));
+
+        new Chart(ctx, {
+        type: 'bar',
+        data: {
+        labels: nombres,
+        datasets: [{
+        label: 'Promedio Final',
+        data: promedios,
+        backgroundColor: promedios.map(p => p >= 6 ? 'rgba(40, 167, 69, 0.7)' : 'rgba(220, 53, 69, 0.7)'),
+        borderColor: promedios.map(p => p >= 6 ? 'rgba(40, 167, 69, 1)' : 'rgba(220, 53, 69, 1)'),
+        borderWidth: 2,
+        borderRadius: 5
+        }]
+        },
+        options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+        legend: { display: false }
+        },
+        scales: {
+        y: {
+        beginAtZero: true,
+        max: 10,
+        grid: { color: 'rgba(0,0,0,0.05)' }
+        },
+        x: { grid: { display: false } }
+        }
+        }
+        });
+        });
+    </script>
+}

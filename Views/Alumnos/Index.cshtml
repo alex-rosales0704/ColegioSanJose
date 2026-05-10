@@ -1,0 +1,70 @@
+﻿@model IEnumerable<ColegioSanJose.Models.Alumno>
+
+@{
+    ViewData["Title"] = "Listado de Alumnos";
+}
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h1 class="text-primary"><i class="bi bi-people-fill"></i> Alumnos Registrados</h1>
+            <p class="text-muted">Gestión de la base de datos de estudiantes del Colegio San José.</p>
+        </div>
+        <div>
+            <a asp-action="Create" class="btn btn-success btn-lg shadow-sm">
+                <i class="bi bi-plus-circle"></i> Nuevo Alumno
+            </a>
+        </div>
+    </div>
+
+    <div class="card shadow border-0">
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table table-hover mb-0">
+                    <thead class="bg-dark text-white">
+                        <tr>
+                            <th class="ps-4">@Html.DisplayNameFor(model => model.Nombre)</th>
+                            <th>@Html.DisplayNameFor(model => model.Apellido)</th>
+                            <th>@Html.DisplayNameFor(model => model.FechaNacimiento)</th>
+                            <th>@Html.DisplayNameFor(model => model.Grado)</th>
+                            <th class="text-center">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr class="align-middle">
+                                <td class="ps-4 font-weight-bold">@Html.DisplayFor(modelItem => item.Nombre)</td>
+                                <td>@Html.DisplayFor(modelItem => item.Apellido)</td>
+                                <td>@item.FechaNacimiento.ToString("dd/MM/yyyy")</td>
+                                <td>
+                                    <span class="badge bg-info text-dark px-3">@Html.DisplayFor(modelItem => item.Grado)</span>
+                                </td>
+                                <td class="text-center">
+                                    <div class="d-flex justify-content-center gap-2">
+                                        <a asp-action="Edit" asp-route-id="@item.AlumnoId" class="btn btn-warning btn-sm shadow-sm">
+                                            <i class="bi bi-pencil"></i> Editar
+                                        </a>
+                                        <a asp-action="Details" asp-route-id="@item.AlumnoId" class="btn btn-primary btn-sm shadow-sm">
+                                            <i class="bi bi-eye"></i> Ver
+                                        </a>
+                                        <a asp-action="Delete" asp-route-id="@item.AlumnoId" class="btn btn-danger btn-sm shadow-sm">
+                                            <i class="bi bi-trash"></i> Borrar
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    
+    @if (!Model.Any())
+    {
+        <div class="text-center mt-5">
+            <p class="text-muted fs-4">No hay alumnos registrados actualmente.</p>
+        </div>
+    }
+</div>

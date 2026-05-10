@@ -1,0 +1,81 @@
+﻿@model IEnumerable<ColegioSanJose.Models.Expediente>
+
+@{
+    ViewData["Title"] = "Control de Expedientes";
+}
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h1 class="text-primary"><i class="bi bi-folder-check"></i> Expedientes Académicos</h1>
+            <p class="text-muted">Registro oficial de calificaciones y seguimiento del Colegio San José.</p>
+        </div>
+        <div>
+            <a asp-action="Create" class="btn btn-success btn-lg shadow-sm">
+                <i class="bi bi-file-earmark-plus"></i> Registrar Nueva Nota
+            </a>
+        </div>
+    </div>
+
+    <div class="card shadow border-0">
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table table-hover mb-0">
+                    <thead class="bg-dark text-white">
+                        <tr>
+                            <th class="ps-4">Estudiante</th>
+                            <th>Materia</th>
+                            <th class="text-center">Nota Final</th>
+                            <th>Observaciones</th>
+                            <th class="text-center">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr class="align-middle">
+                                <td class="ps-4">
+                                    <div class="fw-bold text-dark">
+                                        @item.Alumno?.Nombre @item.Alumno?.Apellido
+                                    </div>
+                                    <small class="text-muted">ID: @item.AlumnoId</small>
+                                </td>
+                                <td>
+                                    <span class="text-primary fw-bold">@item.Materia?.NombreMateria</span>
+                                </td>
+                                <td class="text-center">
+                                    <span class="badge @(item.NotaFinal >= 6 ? "bg-success" : "bg-danger") fs-6 px-3 shadow-sm">
+                                        @item.NotaFinal
+                                    </span>
+                                </td>
+                                <td>
+                                    <small class="text-muted italic">@(string.IsNullOrEmpty(item.Observaciones) ? "-" : item.Observaciones)</small>
+                                </td>
+                                <td class="text-center">
+                                    <div class="d-flex justify-content-center gap-2">
+                                        <a asp-action="Edit" asp-route-id="@item.ExpedienteId" class="btn btn-warning btn-sm shadow-sm">
+                                            <i class="bi bi-pencil"></i> Editar
+                                        </a>
+                                        <a asp-action="Details" asp-route-id="@item.ExpedienteId" class="btn btn-primary btn-sm shadow-sm">
+                                            <i class="bi bi-eye"></i> Ver
+                                        </a>
+                                        <a asp-action="Delete" asp-route-id="@item.ExpedienteId" class="btn btn-danger btn-sm shadow-sm">
+                                            <i class="bi bi-trash"></i> Borrar
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    @if (!Model.Any())
+    {
+        <div class="alert alert-info mt-4 text-center shadow-sm">
+            <i class="bi bi-info-circle me-2"></i> No hay expedientes registrados. ¡Comienza agregando la primera nota!
+        </div>
+    }
+</div>
