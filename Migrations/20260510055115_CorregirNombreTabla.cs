@@ -5,10 +5,10 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ColegioSanJose.Migrations
 {
-    /// <inheritdoc />
+  
     public partial class CorregirNombreTabla : Migration
     {
-        /// <inheritdoc />
+     
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
@@ -80,7 +80,7 @@ namespace ColegioSanJose.Migrations
                 column: "MateriaId");
         }
 
-        /// <inheritdoc />
+     
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
